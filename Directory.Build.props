@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Authors>PanelPack</Authors>
+    <Product>PanelPack</Product>
+    <Version>0.1.0</Version>
+    <Company>PanelPack</Company>
+    <Description>Empaquetador de cómics y mangas en CBZ/CBR con ComicInfo.xml</Description>
+  </PropertyGroup>
+</Project>

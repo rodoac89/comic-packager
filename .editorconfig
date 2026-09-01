@@ -1,0 +1,14 @@
+root = true
+
+[*.{cs,axaml,xml,md,json,props,csproj}]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+[*.{axaml,xml,csproj,props}]
+indent_style = space
+indent_size = 2

@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ComicPackager.App.Views.LightboxWindow"
+        Width="960"
+        Height="720"
+        MinWidth="480"
+        MinHeight="360"
+        WindowStartupLocation="CenterOwner"
+        KeyDown="OnKeyDown">
+  <DockPanel>
+    <Grid DockPanel.Dock="Bottom" Margin="12" ColumnDefinitions="Auto,*,Auto,Auto">
+      <Button Grid.Column="0" Content="◀" MinWidth="48" Click="OnPrev" />
+      <TextBlock x:Name="Caption"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 Margin="12,0" />
+      <Button Grid.Column="2" Content="▶" MinWidth="48" Click="OnNext" />
+      <Button Grid.Column="3" Content="Esc" MinWidth="64" Margin="8,0,0,0" Click="OnClose" />
+    </Grid>
+    <Border Background="Black">
+      <Image x:Name="Preview" Stretch="Uniform" Margin="8" />
+    </Border>
+  </DockPanel>
+</Window>
