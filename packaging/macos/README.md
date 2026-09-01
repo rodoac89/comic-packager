@@ -15,21 +15,21 @@ dotnet publish src/ComicPackager.App -c Release -r osx-x64 --self-contained true
 ## Armar el .app
 
 ```
-PanelPack.app/
+Comic Packager.app/
   Contents/
     Info.plist
-    MacOS/PanelPack      ← binario publicado
+    MacOS/ComicPackager      ← binario publicado
     Resources/AppIcon.icns
 ```
 
-`Info.plist` mínimo: `CFBundleName=PanelPack`, `CFBundleExecutable=PanelPack`, `CFBundleIdentifier=dev.panelpack.app`, `LSMinimumSystemVersion=12.0`.
+`Info.plist` mínimo: `CFBundleName=Comic Packager`, `CFBundleExecutable=ComicPackager`, `CFBundleIdentifier=dev.comicpackager.app`, `LSMinimumSystemVersion=12.0`.
 
-Notarización (Apple Developer): `codesign --deep --force --sign "Developer ID" PanelPack.app` y `notarytool submit`.
+Notarización (Apple Developer): `codesign --deep --force --sign "Developer ID" "Comic Packager.app"` y `notarytool submit`.
 
 ## .dmg
 
 ```bash
-hdiutil create -volname PanelPack -srcfolder PanelPack.app -ov -format UDZO PanelPack.dmg
+hdiutil create -volname "Comic Packager" -srcfolder "Comic Packager.app" -ov -format UDZO ComicPackager.dmg
 ```
 
 O [create-dmg](https://github.com/create-dmg/create-dmg) para ventana con icono y atajo a `/Applications`.

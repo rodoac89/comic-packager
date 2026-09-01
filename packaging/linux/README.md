@@ -10,30 +10,30 @@ dotnet publish src/ComicPackager.App -c Release -r linux-x64 --self-contained tr
 
 También `linux-arm64` si hace falta.
 
-El binario sale como `PanelPack`. Dependencias nativas de Skia van incluidas en self-contained.
+El binario sale como `ComicPackager`. Dependencias nativas de Skia van incluidas en self-contained.
 
 ## AppImage (recomendado para distros varias)
 
 1. Instala [appimagetool](https://github.com/AppImage/AppImageKit).
-2. Crea `PanelPack.AppDir`:
+2. Crea `ComicPackager.AppDir`:
 
 ```
-PanelPack.AppDir/
-  AppRun                  → script que ejecuta usr/bin/PanelPack
-  panelpack.desktop
-  panelpack.png
-  usr/bin/PanelPack       → binario publicado
+ComicPackager.AppDir/
+  AppRun                       → script que ejecuta usr/bin/ComicPackager
+  comic-packager.desktop
+  comic-packager.png
+  usr/bin/ComicPackager        → binario publicado
 ```
 
-`packaging/linux/panelpack.desktop` es la plantilla. `AppRun`:
+`packaging/linux/comic-packager.desktop` es la plantilla. `AppRun`:
 
 ```bash
 #!/bin/sh
 HERE="$(dirname "$(readlink -f "$0")")"
-exec "$HERE/usr/bin/PanelPack" "$@"
+exec "$HERE/usr/bin/ComicPackager" "$@"
 ```
 
-3. `appimagetool PanelPack.AppDir PanelPack-x86_64.AppImage`
+3. `appimagetool ComicPackager.AppDir ComicPackager-x86_64.AppImage`
 
 ## .deb
 
@@ -42,25 +42,25 @@ Estructura mínima:
 ```
 debian-pkg/
   DEBIAN/control
-  usr/bin/panelpack            → wrapper o el binario
-  usr/share/applications/panelpack.desktop
-  usr/lib/panelpack/           → publicación
+  usr/bin/comic-packager                 → wrapper o el binario
+  usr/share/applications/comic-packager.desktop
+  usr/lib/comic-packager/                → publicación
 ```
 
 `control`:
 
 ```
-Package: panelpack
+Package: comic-packager
 Version: 0.1.0
 Section: graphics
 Priority: optional
 Architecture: amd64
-Maintainer: PanelPack
+Maintainer: Comic Packager
 Description: Empaquetador de cómics CBZ/CBR con ComicInfo.xml
 ```
 
 ```bash
-dpkg-deb --build debian-pkg panelpack_0.1.0_amd64.deb
+dpkg-deb --build debian-pkg comic-packager_0.1.0_amd64.deb
 ```
 
 El CBR seguirá deshabilitado salvo que el usuario instale `rar` de RARLAB (no está en los repos de Debian de forma legal/libre).

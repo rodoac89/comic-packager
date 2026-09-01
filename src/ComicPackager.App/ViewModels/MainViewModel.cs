@@ -65,7 +65,11 @@ public partial class MainViewModel : ViewModelBase, IDisposable
         ThemeName = settings.Theme;
         UiLanguage = settings.Language;
         IsCbrAvailable = packing.IsCbrAvailable;
-        CbrUnavailableReason = packing.CbrUnavailableReason;
+        CbrUnavailableReason = packing.IsCbrAvailable
+            ? string.Empty
+            : loc.Language == "en"
+                ? RarBinaryDetector.UnavailableMessageEn
+                : RarBinaryDetector.UnavailableMessageEs;
         RefreshOutputName();
         RefreshStatus();
     }
@@ -183,12 +187,18 @@ public partial class MainViewModel : ViewModelBase, IDisposable
         Loc.Language = value;
         _settings.Language = Loc.Language;
         OnPropertyChanged(nameof(Loc));
+        OnPropertyChanged(string.Empty);
         ReadingHint = BookType switch
         {
             BookType.Manga => Loc["MangaHint"],
             BookType.ManhwaWebtoon => Loc["ManhwaHint"],
             _ => string.Empty,
         };
+        if (!IsPacking)
+            ProgressMessage = Loc["Ready"];
+        CbrUnavailableReason = Loc.Language == "en"
+            ? RarBinaryDetector.UnavailableMessageEn
+            : RarBinaryDetector.UnavailableMessageEs;
         RefreshStatus();
         OnPropertyChanged(nameof(UiLanguageIndex));
         PersistSettings();

@@ -79,7 +79,7 @@ public class ImageImporterTests
 
     private static string CreateTempDir()
     {
-        var dir = Path.Combine(Path.GetTempPath(), "panelpack-import-" + Guid.NewGuid().ToString("N"));
+        var dir = Path.Combine(Path.GetTempPath(), "comicpackager-import-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(dir);
         return dir;
     }

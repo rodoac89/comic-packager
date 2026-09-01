@@ -8,8 +8,8 @@
         x:Class="ComicPackager.App.Views.MainWindow"
         x:Name="Main"
         x:DataType="vm:MainViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="{Binding Loc[AppTitle]}"
+        Icon="/Assets/ComicPackager.ico"
+        Title="{Binding Loc.AppTitle}"
         Width="1280"
         Height="820"
         MinWidth="960"
@@ -29,16 +29,22 @@
   <DockPanel>
     <Border DockPanel.Dock="Top" Padding="12,8" Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
       <Grid ColumnDefinitions="*,Auto">
-        <TextBlock Text="{Binding Loc[AppTitle]}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" />
+        <TextBlock Text="{Binding Loc.AppTitle}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" />
         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
           <ComboBox SelectedIndex="{Binding UiLanguageIndex}" Width="120">
             <ComboBoxItem Content="Español" />
             <ComboBoxItem Content="English" />
           </ComboBox>
           <ComboBox SelectedIndex="{Binding ThemeIndex}" Width="130">
-            <ComboBoxItem Content="{Binding Loc[ThemeDark]}" />
-            <ComboBoxItem Content="{Binding Loc[ThemeLight]}" />
-            <ComboBoxItem Content="{Binding Loc[ThemeSystem]}" />
+            <ComboBoxItem>
+              <TextBlock Text="{Binding Loc.ThemeDark}" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+              <TextBlock Text="{Binding Loc.ThemeLight}" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+              <TextBlock Text="{Binding Loc.ThemeSystem}" />
+            </ComboBoxItem>
           </ComboBox>
         </StackPanel>
       </Grid>
@@ -68,22 +74,22 @@
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
       <Grid ColumnDefinitions="*,Auto">
         <WrapPanel Orientation="Horizontal">
-          <Button Margin="0,0,8,8" Command="{Binding AddFilesCommand}" Content="{Binding Loc[AddFiles]}" />
-          <Button Margin="0,0,8,8" Command="{Binding AddFolderCommand}" Content="{Binding Loc[AddFolder]}" />
+          <Button Margin="0,0,8,8" Command="{Binding AddFilesCommand}" Content="{Binding Loc.AddFiles}" />
+          <Button Margin="0,0,8,8" Command="{Binding AddFolderCommand}" Content="{Binding Loc.AddFolder}" />
           <CheckBox Margin="0,0,16,8" IsChecked="{Binding RecursiveFolders}"
-                    Content="{Binding Loc[Recursive]}" VerticalAlignment="Center" />
-          <Button Margin="0,0,8,8" Command="{Binding MoveUpCommand}" Content="{Binding Loc[MoveUp]}" />
-          <Button Margin="0,0,8,8" Command="{Binding MoveDownCommand}" Content="{Binding Loc[MoveDown]}" />
-          <Button Margin="0,0,8,8" Command="{Binding ReverseAllCommand}" Content="{Binding Loc[ReverseNow]}" />
-          <Button Margin="0,0,8,8" Command="{Binding ReverseSelectedCommand}" Content="{Binding Loc[ReverseSelected]}" />
-          <Button Margin="0,0,8,8" Command="{Binding MakeCoverCommand}" Content="{Binding Loc[MakeCover]}" />
-          <Button Margin="0,0,8,8" Command="{Binding RemoveSelectedCommand}" Content="{Binding Loc[Remove]}" />
-          <Button Margin="0,0,8,8" Command="{Binding ClearCommand}" Content="{Binding Loc[Clear]}" />
+                    Content="{Binding Loc.Recursive}" VerticalAlignment="Center" />
+          <Button Margin="0,0,8,8" Command="{Binding MoveUpCommand}" Content="{Binding Loc.MoveUp}" />
+          <Button Margin="0,0,8,8" Command="{Binding MoveDownCommand}" Content="{Binding Loc.MoveDown}" />
+          <Button Margin="0,0,8,8" Command="{Binding ReverseAllCommand}" Content="{Binding Loc.ReverseNow}" />
+          <Button Margin="0,0,8,8" Command="{Binding ReverseSelectedCommand}" Content="{Binding Loc.ReverseSelected}" />
+          <Button Margin="0,0,8,8" Command="{Binding MakeCoverCommand}" Content="{Binding Loc.MakeCover}" />
+          <Button Margin="0,0,8,8" Command="{Binding RemoveSelectedCommand}" Content="{Binding Loc.Remove}" />
+          <Button Margin="0,0,8,8" Command="{Binding ClearCommand}" Content="{Binding Loc.Clear}" />
         </WrapPanel>
         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-          <TextBlock Text="{Binding Loc[Zoom]}" VerticalAlignment="Center" />
+          <TextBlock Text="{Binding Loc.Zoom}" VerticalAlignment="Center" />
           <Slider Width="140" Minimum="80" Maximum="240" Value="{Binding ThumbnailSize}" />
-          <Button Classes="accent" MinWidth="140" Command="{Binding PackCommand}" Content="{Binding Loc[Pack]}" />
+          <Button Classes="accent" MinWidth="140" Command="{Binding PackCommand}" Content="{Binding Loc.Pack}" />
         </StackPanel>
       </Grid>
     </Border>
@@ -91,80 +97,86 @@
     <Grid ColumnDefinitions="340,*">
       <ScrollViewer>
         <StackPanel Margin="16" Spacing="8">
-          <TextBlock Text="{Binding Loc[Metadata]}" FontWeight="SemiBold" FontSize="16" />
-          <TextBlock Text="{Binding Loc[Title]}" />
+          <TextBlock Text="{Binding Loc.Metadata}" FontWeight="SemiBold" FontSize="16" />
+          <TextBlock Text="{Binding Loc.Title}" />
           <TextBox Text="{Binding Title}" />
-          <TextBlock Text="{Binding Loc[Series]}" />
+          <TextBlock Text="{Binding Loc.Series}" />
           <TextBox Text="{Binding Series}" />
           <Grid ColumnDefinitions="*,8,*">
             <StackPanel>
-              <TextBlock Text="{Binding Loc[Number]}" />
+              <TextBlock Text="{Binding Loc.Number}" />
               <TextBox Text="{Binding Number}" />
             </StackPanel>
             <StackPanel Grid.Column="2">
-              <TextBlock Text="{Binding Loc[Volume]}" />
+              <TextBlock Text="{Binding Loc.Volume}" />
               <TextBox Text="{Binding VolumeText}" />
             </StackPanel>
           </Grid>
-          <TextBlock Text="{Binding Loc[Writer]}" />
+          <TextBlock Text="{Binding Loc.Writer}" />
           <TextBox Text="{Binding Writer}" />
-          <TextBlock Text="{Binding Loc[Artist]}" />
+          <TextBlock Text="{Binding Loc.Artist}" />
           <TextBox Text="{Binding Artist}" />
-          <TextBlock Text="{Binding Loc[Publisher]}" />
+          <TextBlock Text="{Binding Loc.Publisher}" />
           <TextBox Text="{Binding Publisher}" />
           <Grid ColumnDefinitions="*,8,*,8,*">
             <StackPanel>
-              <TextBlock Text="{Binding Loc[Year]}" />
+              <TextBlock Text="{Binding Loc.Year}" />
               <TextBox Text="{Binding YearText}" />
             </StackPanel>
             <StackPanel Grid.Column="2">
-              <TextBlock Text="{Binding Loc[Month]}" />
+              <TextBlock Text="{Binding Loc.Month}" />
               <TextBox Text="{Binding MonthText}" />
             </StackPanel>
             <StackPanel Grid.Column="4">
-              <TextBlock Text="{Binding Loc[Day]}" />
+              <TextBlock Text="{Binding Loc.Day}" />
               <TextBox Text="{Binding DayText}" />
             </StackPanel>
           </Grid>
-          <TextBlock Text="{Binding Loc[Genre]}" />
+          <TextBlock Text="{Binding Loc.Genre}" />
           <TextBox Text="{Binding Genre}" />
-          <TextBlock Text="{Binding Loc[LanguageIso]}" />
+          <TextBlock Text="{Binding Loc.LanguageIso}" />
           <TextBox Text="{Binding LanguageIso}" PlaceholderText="es, en, ja…" />
-          <TextBlock Text="{Binding Loc[Summary]}" />
+          <TextBlock Text="{Binding Loc.Summary}" />
           <TextBox Text="{Binding Summary}" AcceptsReturn="True" Height="90" TextWrapping="Wrap" />
-          <TextBlock Text="{Binding Loc[BookType]}" />
+          <TextBlock Text="{Binding Loc.BookType}" />
           <ComboBox SelectedIndex="{Binding BookTypeIndex}">
-            <ComboBoxItem Content="{Binding Loc[TypeComic]}" />
-            <ComboBoxItem Content="{Binding Loc[TypeManga]}" />
-            <ComboBoxItem Content="{Binding Loc[TypeManhwa]}" />
+            <ComboBoxItem>
+              <TextBlock Text="{Binding Loc.TypeComic}" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+              <TextBlock Text="{Binding Loc.TypeManga}" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+              <TextBlock Text="{Binding Loc.TypeManhwa}" />
+            </ComboBoxItem>
           </ComboBox>
-          <CheckBox IsChecked="{Binding RightToLeft}" Content="{Binding Loc[Rtl]}" />
-          <TextBlock Text="{Binding Loc[RtlHint]}" TextWrapping="Wrap" Opacity="0.75" FontSize="11" />
-          <CheckBox IsChecked="{Binding BlackAndWhite}" Content="{Binding Loc[BlackAndWhite]}" />
-          <TextBlock Text="{Binding Loc[OutputFormat]}" Margin="0,8,0,0" />
+          <CheckBox IsChecked="{Binding RightToLeft}" Content="{Binding Loc.Rtl}" />
+          <TextBlock Text="{Binding Loc.RtlHint}" TextWrapping="Wrap" Opacity="0.75" FontSize="11" />
+          <CheckBox IsChecked="{Binding BlackAndWhite}" Content="{Binding Loc.BlackAndWhite}" />
+          <TextBlock Text="{Binding Loc.OutputFormat}" Margin="0,8,0,0" />
           <StackPanel Orientation="Horizontal" Spacing="16">
-            <RadioButton GroupName="fmt" IsChecked="{Binding IsCbz}" Content="{Binding Loc[CbzRecommended]}" />
+            <RadioButton GroupName="fmt" IsChecked="{Binding IsCbz}" Content="{Binding Loc.CbzRecommended}" />
             <RadioButton GroupName="fmt" IsChecked="{Binding IsCbr}" IsEnabled="{Binding IsCbrAvailable}"
-                         Content="{Binding Loc[Cbr]}" />
+                         Content="{Binding Loc.Cbr}" />
           </StackPanel>
           <TextBlock Text="{Binding CbrUnavailableReason}"
                      TextWrapping="Wrap"
                      Foreground="#E07A5F"
                      FontSize="11"
                      IsVisible="{Binding !IsCbrAvailable}" />
-          <TextBlock Text="{Binding Loc[OutputFileName]}" />
+          <TextBlock Text="{Binding Loc.OutputFileName}" />
           <TextBox Text="{Binding OutputFileName}" />
-          <TextBlock Text="{Binding Loc[Destination]}" />
+          <TextBlock Text="{Binding Loc.Destination}" />
           <Grid ColumnDefinitions="*,8,Auto">
             <TextBox Text="{Binding DestinationFolder}" />
-            <Button Grid.Column="2" Content="{Binding Loc[Browse]}" Command="{Binding BrowseDestinationCommand}" />
+            <Button Grid.Column="2" Content="{Binding Loc.Browse}" Command="{Binding BrowseDestinationCommand}" />
           </Grid>
         </StackPanel>
       </ScrollViewer>
 
       <Border Grid.Column="1" Margin="0,8,8,8">
         <Grid>
-          <TextBlock Text="{Binding Loc[DropHint]}"
+          <TextBlock Text="{Binding Loc.DropHint}"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center"
                      Opacity="0.45"
@@ -188,10 +200,10 @@
                           DoubleTapped="OnCardDoubleTapped">
                     <Border.ContextMenu>
                       <ContextMenu>
-                        <MenuItem Header="{Binding #Main.((vm:MainViewModel)DataContext).Loc[MakeCover]}"
+                        <MenuItem Header="{Binding #Main.((vm:MainViewModel)DataContext).Loc.MakeCover}"
                                   Command="{Binding #Main.((vm:MainViewModel)DataContext).MakeCoverCommand}"
                                   CommandParameter="{Binding}" />
-                        <MenuItem Header="{Binding #Main.((vm:MainViewModel)DataContext).Loc[PageType]}">
+                        <MenuItem Header="{Binding #Main.((vm:MainViewModel)DataContext).Loc.PageType}">
                           <MenuItem Header="FrontCover" Command="{Binding SetPageTypeCommand}" CommandParameter="FrontCover" />
                           <MenuItem Header="InnerCover" Command="{Binding SetPageTypeCommand}" CommandParameter="InnerCover" />
                           <MenuItem Header="Story" Command="{Binding SetPageTypeCommand}" CommandParameter="Story" />
@@ -199,7 +211,7 @@
                           <MenuItem Header="BackCover" Command="{Binding SetPageTypeCommand}" CommandParameter="BackCover" />
                           <MenuItem Header="Other" Command="{Binding SetPageTypeCommand}" CommandParameter="Other" />
                         </MenuItem>
-                        <MenuItem Header="{Binding #Main.((vm:MainViewModel)DataContext).Loc[Remove]}"
+                        <MenuItem Header="{Binding #Main.((vm:MainViewModel)DataContext).Loc.Remove}"
                                   Command="{Binding #Main.((vm:MainViewModel)DataContext).RemoveSelectedCommand}" />
                       </ContextMenu>
                     </Border.ContextMenu>
@@ -219,7 +231,7 @@
                                 Padding="6,2"
                                 CornerRadius="0,0,0,6"
                                 IsVisible="{Binding IsCover}">
-                          <TextBlock Text="{Binding #Main.((vm:MainViewModel)DataContext).Loc[Cover]}"
+                          <TextBlock Text="{Binding #Main.((vm:MainViewModel)DataContext).Loc.Cover}"
                                      Foreground="White" FontSize="11" />
                         </Border>
                       </Grid>

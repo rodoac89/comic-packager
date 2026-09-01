@@ -1,8 +1,8 @@
-# PanelPack (comic-packager)
+# Comic Packager
 
 Aplicación de escritorio multiplataforma para empaquetar imágenes de cómics y mangas en **CBZ** (recomendado) o **CBR**, con editor visual de páginas y `ComicInfo.xml` compatible con lectores modernos (Komga, Kavita, CDisplayEx, YACReader, etc.).
 
-El producto se llama **PanelPack**. El `ComicInfo.xml` incluye `Notes = Created with PanelPack`.
+El `ComicInfo.xml` incluye `Notes = Created with Comic Packager`.
 
 ## Por qué Avalonia y no GTK# / MonoDevelop
 
@@ -53,7 +53,7 @@ La **lista interna de páginas** es la fuente de verdad del orden en el archivo 
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│ PanelPack — comic-packager              [Español] [Oscuro]       │
+│ Comic Packager                              [Español] [Oscuro]   │
 ├────────────────────┬─────────────────────────────────────────────┤
 │ METADATOS          │  Miniaturas (cuadrícula)                    │
 │ Título / Serie     │  ┌──────┐ ┌──────┐ ┌──────┐                 │

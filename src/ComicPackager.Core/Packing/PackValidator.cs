@@ -65,7 +65,7 @@ public sealed class PackValidator
                 Directory.CreateDirectory(full);
             }
 
-            var probe = Path.Combine(full, ".panelpack-write-test-" + Guid.NewGuid().ToString("N"));
+            var probe = Path.Combine(full, ".comicpackager-write-test-" + Guid.NewGuid().ToString("N"));
             File.WriteAllText(probe, "ok");
             File.Delete(probe);
             return true;

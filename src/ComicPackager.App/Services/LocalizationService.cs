@@ -18,12 +18,92 @@ public sealed class LocalizationService : INotifyPropertyChanged
             if (_language == normalized)
                 return;
             _language = normalized;
-            OnPropertyChanged(nameof(Language));
-            OnPropertyChanged("Item[]");
+            NotifyAll();
         }
     }
 
     public string this[string key] => Get(key);
+
+    public string AppTitle => Get(nameof(AppTitle));
+    public string Metadata => Get(nameof(Metadata));
+    public string Title => Get(nameof(Title));
+    public string Series => Get(nameof(Series));
+    public string Number => Get(nameof(Number));
+    public string Volume => Get(nameof(Volume));
+    public string Writer => Get(nameof(Writer));
+    public string Artist => Get(nameof(Artist));
+    public string Publisher => Get(nameof(Publisher));
+    public string Year => Get(nameof(Year));
+    public string Month => Get(nameof(Month));
+    public string Day => Get(nameof(Day));
+    public string Genre => Get(nameof(Genre));
+    public string LanguageIso => Get(nameof(LanguageIso));
+    public string Summary => Get(nameof(Summary));
+    public string BookType => Get(nameof(BookType));
+    public string TypeComic => Get(nameof(TypeComic));
+    public string TypeManga => Get(nameof(TypeManga));
+    public string TypeManhwa => Get(nameof(TypeManhwa));
+    public string Rtl => Get(nameof(Rtl));
+    public string RtlHint => Get(nameof(RtlHint));
+    public string MangaHint => Get(nameof(MangaHint));
+    public string ManhwaHint => Get(nameof(ManhwaHint));
+    public string BlackAndWhite => Get(nameof(BlackAndWhite));
+    public string OutputFormat => Get(nameof(OutputFormat));
+    public string CbzRecommended => Get(nameof(CbzRecommended));
+    public string Cbr => Get(nameof(Cbr));
+    public string CbrDisabled => Get(nameof(CbrDisabled));
+    public string OutputFileName => Get(nameof(OutputFileName));
+    public string Destination => Get(nameof(Destination));
+    public string Browse => Get(nameof(Browse));
+    public string Pages => Get(nameof(Pages));
+    public string AddFiles => Get(nameof(AddFiles));
+    public string AddFolder => Get(nameof(AddFolder));
+    public string Recursive => Get(nameof(Recursive));
+    public string MoveUp => Get(nameof(MoveUp));
+    public string MoveDown => Get(nameof(MoveDown));
+    public string ReverseAll => Get(nameof(ReverseAll));
+    public string ReverseSelected => Get(nameof(ReverseSelected));
+    public string ReverseNow => Get(nameof(ReverseNow));
+    public string MakeCover => Get(nameof(MakeCover));
+    public string Remove => Get(nameof(Remove));
+    public string Clear => Get(nameof(Clear));
+    public string Pack => Get(nameof(Pack));
+    public string Zoom => Get(nameof(Zoom));
+    public string Theme => Get(nameof(Theme));
+    public string ThemeDark => Get(nameof(ThemeDark));
+    public string ThemeLight => Get(nameof(ThemeLight));
+    public string ThemeSystem => Get(nameof(ThemeSystem));
+    public string LanguageUi => Get(nameof(LanguageUi));
+    public string Spanish => Get(nameof(Spanish));
+    public string English => Get(nameof(English));
+    public string DropHint => Get(nameof(DropHint));
+    public string NoPages => Get(nameof(NoPages));
+    public string Cover => Get(nameof(Cover));
+    public string PageType => Get(nameof(PageType));
+    public string Confirm => Get(nameof(Confirm));
+    public string Cancel => Get(nameof(Cancel));
+    public string Ok => Get(nameof(Ok));
+    public string Yes => Get(nameof(Yes));
+    public string No => Get(nameof(No));
+    public string OverwriteTitle => Get(nameof(OverwriteTitle));
+    public string OverwriteMessage => Get(nameof(OverwriteMessage));
+    public string DeleteMany => Get(nameof(DeleteMany));
+    public string ClearConfirm => Get(nameof(ClearConfirm));
+    public string PackSuccess => Get(nameof(PackSuccess));
+    public string PackSuccessBody => Get(nameof(PackSuccessBody));
+    public string OpenFolder => Get(nameof(OpenFolder));
+    public string ImportWarnings => Get(nameof(ImportWarnings));
+    public string Corrupt => Get(nameof(Corrupt));
+    public string Skipped => Get(nameof(Skipped));
+    public string Duplicates => Get(nameof(Duplicates));
+    public string Error => Get(nameof(Error));
+    public string Packing => Get(nameof(Packing));
+    public string Ready => Get(nameof(Ready));
+    public string PagesStatus => Get(nameof(PagesStatus));
+    public string PickImages => Get(nameof(PickImages));
+    public string PickFolder => Get(nameof(PickFolder));
+    public string PickDestination => Get(nameof(PickDestination));
+    public string Lightbox => Get(nameof(Lightbox));
 
     public string Get(string key)
     {
@@ -34,6 +114,18 @@ public sealed class LocalizationService : INotifyPropertyChanged
         return key;
     }
 
+    public void NotifyAll()
+    {
+        OnPropertyChanged(string.Empty);
+        OnPropertyChanged("Item[]");
+        OnPropertyChanged("Item");
+        foreach (var key in Tables["es"].Keys)
+        {
+            OnPropertyChanged(key);
+            OnPropertyChanged($"Item[{key}]");
+        }
+    }
+
     private void OnPropertyChanged([CallerMemberName] string? name = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
@@ -41,7 +133,7 @@ public sealed class LocalizationService : INotifyPropertyChanged
     {
         ["es"] = new()
         {
-            ["AppTitle"] = "PanelPack — comic-packager",
+            ["AppTitle"] = "Comic Packager",
             ["Metadata"] = "Metadatos",
             ["Title"] = "Título",
             ["Series"] = "Serie",
@@ -124,7 +216,7 @@ public sealed class LocalizationService : INotifyPropertyChanged
         },
         ["en"] = new()
         {
-            ["AppTitle"] = "PanelPack — comic-packager",
+            ["AppTitle"] = "Comic Packager",
             ["Metadata"] = "Metadata",
             ["Title"] = "Title",
             ["Series"] = "Series",

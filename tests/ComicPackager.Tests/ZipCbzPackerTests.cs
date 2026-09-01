@@ -11,7 +11,7 @@ public class ZipCbzPackerTests
     [Fact]
     public async Task Packs_pages_at_zip_root_with_padded_names_and_comicinfo()
     {
-        var dir = Path.Combine(Path.GetTempPath(), "panelpack-zip-" + Guid.NewGuid().ToString("N"));
+        var dir = Path.Combine(Path.GetTempPath(), "comicpackager-zip-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(dir);
         try
         {
@@ -54,7 +54,7 @@ public class ZipCbzPackerTests
             var xml = new StreamReader(zip.GetEntry("ComicInfo.xml")!.Open()).ReadToEnd();
             Assert.Contains("<Manga>No</Manga>", xml);
             Assert.Contains("<Title>Demo</Title>", xml);
-            Assert.Contains("Created with PanelPack", xml);
+            Assert.Contains("Created with Comic Packager", xml);
         }
         finally
         {

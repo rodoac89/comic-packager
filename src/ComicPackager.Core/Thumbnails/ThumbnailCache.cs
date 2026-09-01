@@ -16,7 +16,7 @@ public sealed class ThumbnailCache
 
     public ThumbnailCache(string? root = null)
     {
-        _root = root ?? Path.Combine(Path.GetTempPath(), "PanelPack", "thumbs");
+        _root = root ?? Path.Combine(Path.GetTempPath(), "ComicPackager", "thumbs");
         Directory.CreateDirectory(_root);
     }
 

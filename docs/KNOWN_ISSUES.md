@@ -27,7 +27,7 @@
 - Máximo 9999 páginas por el padding `0001`–`9999`.
 - Nombres de archivo de salida se sanitizan (`: / \ * ?` → `_`) para que el mismo nombre sirva en Windows, Linux y macOS.
 - Si el destino ya existe, se pregunta antes de sobrescribir. Un empaquetado a medias se intenta borrar.
-- Las miniaturas viven en `%TEMP%/PanelPack/thumbs` (o `/tmp/PanelPack/thumbs`). No se limpian al salir, para reutilizar caché; se pueden borrar a mano.
+- Las miniaturas viven en `%TEMP%/ComicPackager/thumbs` (o `/tmp/ComicPackager/thumbs`). No se limpian al salir, para reutilizar caché; se pueden borrar a mano.
 
 ## UI
 

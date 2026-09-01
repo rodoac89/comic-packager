@@ -16,7 +16,7 @@ public sealed class SettingsService
     {
         FilePath = filePath ?? Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "PanelPack",
+            "ComicPackager",
             "settings.json");
     }
 
