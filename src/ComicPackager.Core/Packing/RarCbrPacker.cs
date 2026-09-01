@@ -34,7 +34,7 @@ public sealed class RarCbrPacker : IComicPacker
         ArgumentException.ThrowIfNullOrWhiteSpace(destinationPath);
         ArgumentNullException.ThrowIfNull(pages);
 
-        var tempDir = Path.Combine(Path.GetTempPath(), "PanelPack", "rar-" + Guid.NewGuid().ToString("N"));
+        var tempDir = Path.Combine(Path.GetTempPath(), "ComicPackager", "rar-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(tempDir);
 
         try

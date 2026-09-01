@@ -56,7 +56,7 @@ public sealed class PackingService
             throw new IOException($"El archivo ya existe: {outputPath}");
         }
 
-        var tempDir = Path.Combine(Path.GetTempPath(), "PanelPack", "pack-" + Guid.NewGuid().ToString("N"));
+        var tempDir = Path.Combine(Path.GetTempPath(), "ComicPackager", "pack-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(tempDir);
         var xmlPath = Path.Combine(tempDir, "ComicInfo.xml");
 

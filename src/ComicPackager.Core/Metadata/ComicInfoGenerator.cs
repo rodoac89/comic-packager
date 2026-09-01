@@ -10,7 +10,7 @@ namespace ComicPackager.Core.Metadata;
 /// </summary>
 public sealed class ComicInfoGenerator
 {
-    public const string CreatorNotes = "Created with PanelPack";
+    public const string CreatorNotes = "Created with Comic Packager";
 
     public string Generate(ComicMetadata metadata, IReadOnlyList<PageItem> pages)
     {

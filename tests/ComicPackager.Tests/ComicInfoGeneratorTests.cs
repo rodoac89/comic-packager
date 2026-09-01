@@ -31,7 +31,7 @@ public class ComicInfoGeneratorTests
         Assert.Equal("Yes", Element(doc, "BlackAndWhite"));
         Assert.Equal("YesAndRightToLeft", Element(doc, "Manga"));
         Assert.Equal("2", Element(doc, "PageCount"));
-        Assert.Equal("Created with PanelPack", Element(doc, "Notes"));
+        Assert.Equal("Created with Comic Packager", Element(doc, "Notes"));
         Assert.Contains("Sombrero de Paja", Element(doc, "Summary"));
 
         var pages = doc.Root!.Element("Pages")!.Elements("Page").ToList();
@@ -100,7 +100,7 @@ public class ComicInfoGeneratorTests
         Assert.Null(doc.Root.Element("Series"));
         Assert.Null(doc.Root.Element("Writer"));
         Assert.Null(doc.Root.Element("Year"));
-        Assert.Equal("Created with PanelPack", Element(doc, "Notes"));
+        Assert.Equal("Created with Comic Packager", Element(doc, "Notes"));
         Assert.Equal("No", Element(doc, "Manga"));
         Assert.Equal("2", Element(doc, "PageCount"));
     }

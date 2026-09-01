@@ -21,7 +21,7 @@ public sealed class ComicMetadata
     public OutputFormat OutputFormat { get; set; } = OutputFormat.Cbz;
     public string OutputFileName { get; set; } = "comic.cbz";
     public string DestinationFolder { get; set; } = string.Empty;
-    public string Notes { get; set; } = "Created with PanelPack";
+    public string Notes { get; set; } = "Created with Comic Packager";
 
     /// <summary>
     /// Valor del elemento Manga según tipo y checkbox RTL.

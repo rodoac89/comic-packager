@@ -41,7 +41,7 @@ public class PackValidatorTests
     [Fact]
     public void Valid_cbz_request_passes()
     {
-        var dest = Path.Combine(Path.GetTempPath(), "panelpack-validator-" + Guid.NewGuid().ToString("N"));
+        var dest = Path.Combine(Path.GetTempPath(), "comicpackager-validator-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(dest);
         try
         {

@@ -5,11 +5,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>Assets\avalonia-logo.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\ComicPackager-light.ico</ApplicationIcon>
     <RootNamespace>ComicPackager.App</RootNamespace>
-    <AssemblyName>PanelPack</AssemblyName>
-    <Product>PanelPack</Product>
-    <AssemblyTitle>PanelPack</AssemblyTitle>
+    <AssemblyName>ComicPackager</AssemblyName>
+    <Product>Comic Packager</Product>
+    <AssemblyTitle>Comic Packager</AssemblyTitle>
   </PropertyGroup>
 
   <ItemGroup>

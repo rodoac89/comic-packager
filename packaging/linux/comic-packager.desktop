@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=PanelPack
+Name=Comic Packager
 Comment=Empaquetar cómics y mangas en CBZ/CBR
-Exec=PanelPack
-Icon=panelpack
+Exec=ComicPackager
+Icon=cComicPackager-light.png
 Terminal=false
 Categories=Graphics;Utility;
 MimeType=image/jpeg;image/png;image/webp;
