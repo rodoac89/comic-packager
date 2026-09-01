@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>Assets\ComicPackager.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\ComicPackager-light.ico</ApplicationIcon>
     <RootNamespace>ComicPackager.App</RootNamespace>
     <AssemblyName>ComicPackager</AssemblyName>
     <Product>Comic Packager</Product>

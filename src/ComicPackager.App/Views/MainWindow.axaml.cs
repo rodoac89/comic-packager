@@ -1,7 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using Avalonia.Styling;
 using Avalonia.VisualTree;
 using ComicPackager.App.ViewModels;
 
@@ -18,6 +20,18 @@ public partial class MainWindow : Window
         InitializeComponent();
         DragDrop.AddDragOverHandler(this, OnDragOver);
         DragDrop.AddDropHandler(this, OnDrop);
+        ApplyThemeIcon();
+    }
+
+    private void ApplyThemeIcon()
+    {
+        var isDark = ActualThemeVariant == ThemeVariant.Dark;
+        var asset = isDark 
+        ? "avares://ComicPackager/Assets/ComicPackager-dark.ico"
+        : "avares://ComicPackager/Assets/ComicPackager-light.ico";
+
+        using var stream = AssetLoader.Open(new Uri(asset));
+        Icon = new WindowIcon(stream);
     }
 
     private void OnWindowKeyDown(object? sender, KeyEventArgs e)
