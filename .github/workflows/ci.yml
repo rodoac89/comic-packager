@@ -16,6 +16,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "10.0.x"
+      
+      - name: Install SkiaSharp dependencies
+        run: 
+          sudo apt-get update
+          sudo apt-get install -y libskia libfontconfig1
 
       - name: Test
         run: dotnet test --configuration Release --nologo
