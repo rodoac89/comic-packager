@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Comic Packager
+Comment=Empaquetar cómics y mangas en CBZ/CBR
+Icon=ComicPackager-light.png
+Categories=Graphics;Utility;
+MimeType=image/jpeg;image/png;image/webp;
+StartupNotify=true

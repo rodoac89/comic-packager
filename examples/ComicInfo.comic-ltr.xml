@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ComicInfo>
+  <Title>The Court of Owls</Title>
+  <Series>Batman</Series>
+  <Number>1</Number>
+  <Volume>2</Volume>
+  <Summary>Batman enfrenta a la Corte de los Búhos.</Summary>
+  <Notes>Created with Comic Packager</Notes>
+  <Year>2011</Year>
+  <Month>11</Month>
+  <Day>1</Day>
+  <Writer>Scott Snyder</Writer>
+  <Penciller>Greg Capullo</Penciller>
+  <Publisher>DC Comics</Publisher>
+  <Genre>Superhero</Genre>
+  <PageCount>2</PageCount>
+  <LanguageISO>en</LanguageISO>
+  <Format>Digital</Format>
+  <BlackAndWhite>No</BlackAndWhite>
+  <Manga>No</Manga>
+  <Pages>
+    <Page Image="0" Type="FrontCover" ImageSize="120000" ImageWidth="1200" ImageHeight="1800" />
+    <Page Image="1" Type="Story" ImageSize="98000" ImageWidth="1200" ImageHeight="1800" />
+  </Pages>
+</ComicInfo>

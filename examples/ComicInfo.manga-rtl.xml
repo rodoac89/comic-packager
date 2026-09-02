@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ComicInfo>
+  <Title>One Piece</Title>
+  <Series>One Piece</Series>
+  <Number>1052</Number>
+  <Volume>100</Volume>
+  <Summary>Luffy y los Sombrero de Paja continúan su viaje pirata.</Summary>
+  <Notes>Created with Comic Packager</Notes>
+  <Year>2022</Year>
+  <Month>5</Month>
+  <Day>2</Day>
+  <Writer>Eiichiro Oda</Writer>
+  <Penciller>Eiichiro Oda</Penciller>
+  <Publisher>Shueisha</Publisher>
+  <Genre>Shonen</Genre>
+  <PageCount>2</PageCount>
+  <LanguageISO>ja</LanguageISO>
+  <Format>Digital</Format>
+  <BlackAndWhite>Yes</BlackAndWhite>
+  <Manga>YesAndRightToLeft</Manga>
+  <Pages>
+    <Page Image="0" Type="FrontCover" ImageSize="120000" ImageWidth="1200" ImageHeight="1800" />
+    <Page Image="1" Type="Story" ImageSize="98000" ImageWidth="1200" ImageHeight="1800" />
+  </Pages>
+</ComicInfo>

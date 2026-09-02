@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ComicPackager.App/ComicPackager.App.csproj" />
+    <Project Path="src/ComicPackager.Core/ComicPackager.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ComicPackager.Tests/ComicPackager.Tests.csproj" />
+  </Folder>
+</Solution>

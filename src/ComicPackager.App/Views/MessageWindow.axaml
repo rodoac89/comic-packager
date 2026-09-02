@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ComicPackager.App.Views.MessageWindow"
+        Width="480"
+        SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        MinHeight="140">
+  <DockPanel Margin="20" LastChildFill="True">
+    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,16,0,0">
+      <Button x:Name="SecondaryButton"
+              IsVisible="False"
+              MinWidth="100"
+              Click="OnSecondary" />
+      <Button x:Name="PrimaryButton"
+              MinWidth="100"
+              IsDefault="True"
+              Click="OnPrimary" />
+    </StackPanel>
+    <ScrollViewer MaxHeight="360">
+      <TextBlock x:Name="MessageText" TextWrapping="Wrap" />
+    </ScrollViewer>
+  </DockPanel>
+</Window>
