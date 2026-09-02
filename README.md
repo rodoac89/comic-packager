@@ -1,5 +1,9 @@
 # Comic Packager
 
+[![CI](https://github.com/rodoac89/comic-packager/actions/workflows/ci.yml/badge.svg)](https://github.com/rodoac89/comic-packager/actions/workflows/ci.yml)
+[![Release](https://github.com/rodoac89/comic-packager/actions/workflows/release.yml/badge.svg)](https://github.com/rodoac89/comic-packager/actions/workflows/release.yml)
+[![GitHub release](https://img.shields.io/github/v/release/rodoac89/comic-packager)](https://github.com/rodoac89/comic-packager/releases/latest)
+
 <img src="./src/ComicPackager.App/Assets/ComicPackager-light.png" alt="Comic Packager Logo" width="150" height="150" />
 
 Aplicación de escritorio multiplataforma para empaquetar imágenes de cómics y mangas en **CBZ** (recomendado) o **CBR**, con editor visual de páginas y `ComicInfo.xml` compatible con lectores modernos (Komga, Kavita, CDisplayEx, YACReader, etc.).
