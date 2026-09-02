@@ -1,0 +1,135 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Test
+        run: dotnet test --configuration Release --nologo
+
+  publish:
+    needs: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+          - os: ubuntu-latest
+            rid: linux-x64
+          - os: macos-latest
+            rid: osx-arm64
+          - os: macos-latest
+            rid: osx-x64
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Version from tag
+        shell: bash
+        run: |
+          REF="${GITHUB_REF_NAME}"
+          if [[ "$REF" == v* ]]; then
+            echo "APP_VERSION=${REF#v}" >> "$GITHUB_ENV"
+          else
+            echo "APP_VERSION=0.0.0-ci.${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Publish
+        shell: bash
+        run: |
+          dotnet publish src/ComicPackager.App \
+            -c Release \
+            -r ${{ matrix.rid }} \
+            --self-contained true \
+            -p:PublishSingleFile=true \
+            -p:IncludeNativeLibrariesForSelfExtract=true \
+            -p:EnableCompressionInSingleFile=true \
+            -p:DebugType=None \
+            -p:DebugSymbols=false \
+            -p:Version="${APP_VERSION}" \
+            -o "publish/${{ matrix.rid }}"
+
+      - name: Pack zip (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          rid="${{ matrix.rid }}"
+          out="publish/${rid}"
+          find "$out" -name '*.pdb' -delete
+          chmod +x "$out/ComicPackager"
+          mkdir -p dist
+          (cd "$out" && zip -r -X "../../dist/ComicPackager-${rid}.zip" .)
+
+      - name: Pack zip (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $rid = "${{ matrix.rid }}"
+          $out = "publish/$rid"
+          Get-ChildItem $out -Filter *.pdb -Recurse -ErrorAction SilentlyContinue | Remove-Item
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Compress-Archive -Path "$out\*" -DestinationPath "dist\ComicPackager-$rid.zip" -Force
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ComicPackager-${{ matrix.rid }}
+          path: dist/ComicPackager-${{ matrix.rid }}.zip
+          if-no-files-found: error
+
+  github-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Comic Packager ${{ github.ref_name }}
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          files: dist/*.zip
+          body: |
+            Binarios portables (self-contained, un zip por plataforma).
+
+            | Archivo | Plataforma |
+            | --- | --- |
+            | `ComicPackager-win-x64.zip` | Windows 64 bits |
+            | `ComicPackager-linux-x64.zip` | Linux x64 |
+            | `ComicPackager-osx-arm64.zip` | macOS Apple Silicon |
+            | `ComicPackager-osx-x64.zip` | macOS Intel |
+
+            Descomprime y ejecuta. En Linux y macOS: `chmod +x ComicPackager` si el sistema lo pide.
+
+            CBR requiere el binario `rar` (WinRAR / RARLAB) en el PATH. Si no está, usa CBZ.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
