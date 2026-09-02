@@ -4,7 +4,7 @@
 #define MyAppExeName "ComicPackager.exe"
 
 [Setup]
-AppId={{8C1E0F7A-6B4D-4E2A-9F11-C0A1C0DE0001}
+AppId={{8C1E0F7A-6B4D-4E2A-9F11-C0A1C0DE0001}}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
