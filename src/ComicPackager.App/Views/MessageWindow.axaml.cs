@@ -64,8 +64,8 @@ public partial class MessageWindow : Window
 
     private Task WaitClosedAsync()
     {
-        var tcs = new TaskCompletionSource();
-        Closed += (_, _) => tcs.TrySetResult();
+        var tcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        Closed += (_, _) => tcs.TrySetResult(null);
         return tcs.Task;
     }
 }
