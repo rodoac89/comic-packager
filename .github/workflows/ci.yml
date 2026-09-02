@@ -9,8 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/dotnet/nightly/sdk:10.0-resolute
     steps:
       - uses: actions/checkout@v4
 
