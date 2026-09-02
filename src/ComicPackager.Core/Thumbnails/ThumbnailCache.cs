@@ -28,7 +28,15 @@ public sealed class ThumbnailCache
             return null;
 
         maxEdge = Math.Clamp(maxEdge, 32, 512);
-        var key = CacheKey(sourcePath, maxEdge);
+        string key;
+        try
+        {
+            key = CacheKey(sourcePath, maxEdge);
+        }
+        catch
+        {
+            return null;
+        }
         var dest = Path.Combine(_root, key + ".jpg");
         if (File.Exists(dest))
             return dest;
