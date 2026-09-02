@@ -19,7 +19,7 @@ jobs:
       
       - name: Install SkiaSharp dependencies
         run: 
-          sudo apt-get update && sudo apt-get install -y libskia libfontconfig1
+          sudo apt-get update && sudo apt-get install -y libfreetype6 libfontconfig1
 
       - name: Test
         run: dotnet test --configuration Release --nologo
