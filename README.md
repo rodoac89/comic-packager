@@ -111,21 +111,6 @@ dotnet publish src/ComicPackager.App -c Release -r osx-arm64 --self-contained tr
 - Windows: Inno Setup / WiX para `.exe` o `.msi` (`packaging/windows`).
 - macOS: `.app` + `.dmg` (`packaging/macos`).
 
-## Release automático (GitHub Actions)
-
-Al subir un tag `vX.Y.Z`, el workflow [Release](.github/workflows/release.yml) ejecuta tests, publica binarios self-contained y crea el GitHub Release con un zip por plataforma.
-
-```bash
-git tag v0.1.0
-git push origin v0.1.0
-```
-
-Tags con sufijo (`v0.2.0-beta.1`) se publican como *pre-release*.
-
-Cada zip incluye el ejecutable y, si el SDK las deja fuera del single-file, las nativas de Skia/Avalonia. No incluye `.pdb`.
-
-Los pull request y pushes a `main`/`master` solo corren tests ([CI](.github/workflows/ci.yml)).
-
 ## Issues conocidos
 
 Ver [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md). Los más importantes:
