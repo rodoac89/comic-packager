@@ -10,6 +10,8 @@ dotnet publish src/ComicPackager.App -c Release -r win-x64 --self-contained true
 
 El ejecutable es `ComicPackager.exe`. Esta carpeta ya es una build portable.
 
+Para un release en GitHub no hace falta Inno/WiX: el workflow `.github/workflows/release.yml` genera `ComicPackager-win-x64.zip` al publicar un tag `vX.Y.Z`.
+
 ## Inno Setup (.exe)
 
 Plantilla mínima (`packaging/windows/comic-packager.iss` como punto de partida):
