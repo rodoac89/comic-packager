@@ -8,6 +8,7 @@ public sealed class PackValidator
     public ValidationResult Validate(PackRequest request, bool rarAvailable)
     {
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(request.Metadata);
         var issues = new List<ValidationIssue>();
         var metadata = request.Metadata;
 

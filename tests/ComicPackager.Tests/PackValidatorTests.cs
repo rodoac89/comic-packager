@@ -8,6 +8,18 @@ public class PackValidatorTests
     private readonly PackValidator _validator = new();
 
     [Fact]
+    public void Throws_when_metadata_is_null()
+    {
+        var request = new PackRequest
+        {
+            Pages = [],
+            Metadata = null!,
+        };
+
+        Assert.Throws<ArgumentNullException>(() => _validator.Validate(request, rarAvailable: false));
+    }
+
+    [Fact]
     public void Fails_without_pages_or_destination()
     {
         var result = _validator.Validate(new PackRequest
