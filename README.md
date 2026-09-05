@@ -6,32 +6,32 @@
 
 <img src="./src/ComicPackager.App/Assets/ComicPackager-light.png" alt="Comic Packager Logo" width="150" height="150" />
 
-Aplicación de escritorio multiplataforma para empaquetar imágenes de cómics y mangas en **CBZ** o **CBR**, con editor visual de páginas y metadatos `ComicInfo.xml` compatible con lectores modernos.
+Cross-platform desktop app for packaging comic and manga images into **CBZ** or **CBR**, with a visual page editor and `ComicInfo.xml` metadata compatible with modern readers.
 
-## Uso
+## Usage
 
-1. Añadir las imágenes a empaquetar ya sea mediante la carga de archivos individuales, carpeta o drag & drop.
-2. Reordenar (si se requiere) en la cuadrícula usando drag&drop.
-3. Marcar portada.
-4. Rellenar metadatos. Si el tipo es Manga, se puede seleccionar la opción de lectura inversa.
-5. Seleccionar el formato de salida (CBZ o CBR)
-6. Hacer clic en «Empaquetar» y elegir destino.
-7. Durante el proceso se genera `ComicInfo.xml` en la raíz del archivo con los metadatos.
+1. Add the images to package by selecting individual files, folder or drag & drop.
+2. Reorder pages (if needed) in the grid using drag & drop.
+3. Mark the cover.
+4. Fill the metadata. If it's Manga, you can enable right-to-left reading.
+5. Choose the output format (CBZ or CBR).
+6. Click **Package** and pick a destination.
+7. During the process, a `ComicInfo.xml` file is generated at the archive root with the metadata.
 
-Atajos: `Ctrl+O` añadir, `Supr` quitar selección, `Ctrl+Enter` empaquetar.
+Shortcuts: `Ctrl+O` add, `Delete` remove selection, `Ctrl+Enter` package.
 
-## Formatos soportados
+## Supported formats
 
-| Formato | Qué es | Cuándo |
+| Format | What it is | When to use it |
 | --- | --- | --- |
-| **CBZ** | ZIP con extensión `.cbz` | Por defecto. No requiere software extra. |
-| **CBR** | RAR real con extensión `.cbr` | Solo si existe el binario `rar`. Si no, CBR se deshabilita y se explica por qué. **Nunca** se crea un ZIP renombrado a `.cbr`. |
+| **CBZ** | ZIP with a `.cbz` extension | Default. No extra software required. |
+| **CBR** | Real RAR with a `.cbr` extension | Only if the `rar` binary is available. Otherwise CBR is disabled and the reason is explained. A ZIP renamed to `.cbr` is **never** created. |
 
-## Requisitos para contribuir
+## Requirements for contributing
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- (Opcional) WinRAR / `rar` de RARLAB si quiere utilizar CBR
-- Linux: `libicu` y las dependencias nativas de Skia que trae Avalonia al publicar
+- (Optional) WinRAR / RARLAB `rar` if you want to use CBR
+- Linux: `libicu` and the native Skia dependencies that Avalonia includes when publishing
 
 ```bash
 git clone https://github.com/rodoac89/comic-packager.git
@@ -41,47 +41,48 @@ dotnet test
 dotnet run --project src/ComicPackager.App
 ```
 
-## Estructura
+## Structure
 
 ```
 comic-packager/
 ├── ComicPackager.slnx
 ├── src/
-│   ├── ComicPackager.Core/          # dominio sin UI
-│   │   ├── Models/                  # PageItem, ComicMetadata, formatos
-│   │   ├── Import/                  # natural sort, importación, reordenado
-│   │   ├── Metadata/                # ComicInfo.xml + nombre de archivo
-│   │   ├── Packing/                 # CBZ (ZIP), CBR (rar), validación
-│   │   └── Thumbnails/              # caché en disco, decode acotado
-│   └── ComicPackager.App/           # UI Avalonia (MVVM)
+│   ├── ComicPackager.Core/          # domain with no UI
+│   │   ├── Models/                  # PageItem, ComicMetadata, formats
+│   │   ├── Import/                  # natural sort, import, reordering
+│   │   ├── Metadata/                # ComicInfo.xml + file name
+│   │   ├── Packing/                 # CBZ (ZIP), CBR (rar), validation
+│   │   └── Thumbnails/              # on-disk cache, bounded decode
+│   └── ComicPackager.App/           # Avalonia UI (MVVM)
 ├── tests/ComicPackager.Tests/
-├── examples/                        # ComicInfo de muestra RTL / LTR
-└── packaging/                       # notas de instaladores
+├── examples/                        # sample ComicInfo RTL / LTR
+└── packaging/                       # installer notes
 ```
 
-## Detalles técnicos
-Dentro de cada archivo generado se crea lo siguiente:
+## Technical details
 
-- **Archivos de imagenes**: `0001.jpg`, `0002.png`, … (padding de 4 dígitos; se conserva la extensión original)
-- `ComicInfo.xml` (UTF-8, esquema Anansi / ComicInfo v2.0–v2.1) que contiene los metados del archivo
-- Compresión ZIP: **STORE** para imágenes (ya vienen comprimidas) y DEFLATE rápido para el XML.
+Each file generated contains:
 
-## Dependencias y licencias
+- **Image files**: `0001.jpg`, `0002.png`, … (4-digit padding; the original extension will kept)
+- `ComicInfo.xml` (UTF-8, Anansi / ComicInfo v2.0–v2.1 schema) with the metadata
+- ZIP compression: **STORE** for images (they are already compressed) and fast DEFLATE for the XML
 
-| Pieza | Licencia | Notas |
+## Dependencies and licenses
+
+| Component | License | Notes |
 | --- | --- | --- |
 | Avalonia UI | MIT | UI |
 | CommunityToolkit.Mvvm | MIT | MVVM |
-| SkiaSharp | MIT | Miniaturas y detección de corruptos |
+| SkiaSharp | MIT | Thumbnails and corrupt-file detection |
 | .NET / System.IO.Compression | MIT | CBZ |
-| `rar` (RARLAB / WinRAR) | Propietario | **No se incluye.** El usuario lo instala si quiere CBR. |
+| `rar` (RARLAB / WinRAR) | Proprietary | **Not bundled.** The user need to install it if they want CBR. |
 
-## Cómo construir instaladores
+## How to build installers
 
-Detalles en `packaging/`. Resumen:
+Details in `packaging/`. Summary:
 
 ```bash
-# Windows (carpeta portable; el .msi se arma con WiX o Inno Setup)
+# Windows (portable folder; the .msi is built with WiX or Inno Setup)
 dotnet publish src/ComicPackager.App -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/win
 
 # Linux
@@ -92,13 +93,12 @@ dotnet publish src/ComicPackager.App -c Release -r osx-arm64 --self-contained tr
 
 ```
 
-- Linux: AppImage (`packaging/linux`) o `.deb`.
-- Windows: Inno Setup / WiX para `.exe` o `.msi` (`packaging/windows`).
+- Linux: AppImage (`packaging/linux`) or `.deb`.
+- Windows: Inno Setup / WiX for `.exe` or `.msi` (`packaging/windows`).
 - macOS: `.app` + `.dmg` (`packaging/macos`).
 
-## Issues conocidos
+## Known issues
 
-Ver [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md). 
-
+See [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md).
 
 Made in Chile 🇨🇱
