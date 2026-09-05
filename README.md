@@ -6,13 +6,28 @@
 
 <img src="./src/ComicPackager.App/Assets/ComicPackager-light.png" alt="Comic Packager Logo" width="150" height="150" />
 
-Aplicación de escritorio multiplataforma para empaquetar imágenes de cómics y mangas en **CBZ** (recomendado) o **CBR**, con editor visual de páginas y `ComicInfo.xml` compatible con lectores modernos (Komga, Kavita, CDisplayEx, YACReader, etc.).
+Aplicación de escritorio multiplataforma para empaquetar imágenes de cómics y mangas en **CBZ** o **CBR**, con editor visual de páginas y metadatos `ComicInfo.xml` compatible con lectores modernos.
 
-El `ComicInfo.xml` incluye `Notes = Created with Comic Packager`.
+## Uso
 
+1. Añadir las imágenes a empaquetar ya sea mediante la carga de archivos individuales, carpeta o drag & drop.
+2. Reordenar (si se requiere) en la cuadrícula usando drag&drop.
+3. Marcar portada.
+4. Rellenar metadatos. Si el tipo es Manga, se puede seleccionar la opción de lectura inversa.
+5. Seleccionar el formato de salida (CBZ o CBR)
+6. Hacer clic en «Empaquetar» y elegir destino.
+7. Durante el proceso se genera `ComicInfo.xml` en la raíz del archivo con los metadatos.
 
+Atajos: `Ctrl+O` añadir, `Supr` quitar selección, `Ctrl+Enter` empaquetar.
 
-## Requisitos para desarrollar
+## Formatos soportados
+
+| Formato | Qué es | Cuándo |
+| --- | --- | --- |
+| **CBZ** | ZIP con extensión `.cbz` | Por defecto. No requiere software extra. |
+| **CBR** | RAR real con extensión `.cbr` | Solo si existe el binario `rar`. Si no, CBR se deshabilita y se explica por qué. **Nunca** se crea un ZIP renombrado a `.cbr`. |
+
+## Requisitos para contribuir
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
 - (Opcional) WinRAR / `rar` de RARLAB si quiere utilizar CBR
@@ -44,42 +59,12 @@ comic-packager/
 └── packaging/                       # notas de instaladores
 ```
 
-La **lista interna de páginas** es la fuente de verdad del orden en el archivo (`0001.ext`, `0002.ext`, …). Marcar «lectura inversa» **no** reordena las imágenes: escribe `<Manga>YesAndRightToLeft</Manga>`. Para invertir archivos hay un botón explícito.
+## Detalles técnicos
+Dentro de cada archivo generado se crea lo siguiente:
 
-## Uso
-
-1. Añadir imágenes (archivos, carpeta o drag & drop). Orden natural: página 2 antes que 10.
-2. Reordenar en la cuadrícula (drag & drop, subir/bajar, invertir). Marcar portada (pasa a ser 0001 / FrontCover).
-3. Rellenar metadatos. Si el tipo es Manga, se puede seleccionar la opción de lectura inversa.
-4. Hacer clic en «Empaquetar» y elegir destino y formato. Se crea un archivo CBZ o CBR
-5. Durante el proceso se genera `ComicInfo.xml` en la raíz del archivo con los metadatos.
-
-Atajos: `Ctrl+O` añadir, `Supr` quitar selección, `Ctrl+Enter` empaquetar.
-
-## Formatos
-
-| Formato | Qué es | Cuándo |
-| --- | --- | --- |
-| **CBZ** | ZIP con extensión `.cbz` | Por defecto. No requiere software extra. |
-| **CBR** | RAR real con extensión `.cbr` | Solo si existe el binario `rar`. Si no, CBR se deshabilita y se explica por qué. **Nunca** se crea un ZIP renombrado a `.cbr`. |
-
-Dentro del archivo, en la **raíz** (sin carpetas):
-
-- `0001.jpg`, `0002.png`, … (padding de 4 dígitos; se conserva la extensión original)
-- `ComicInfo.xml` (UTF-8, esquema Anansi / ComicInfo v2.0–v2.1)
-
-Compresión ZIP: **STORE** para imágenes (ya vienen comprimidas) y DEFLATE rápido para el XML.
-
-## ComicInfo.xml y lectura inversa
-
-| Tipo | Checkbox RTL | `<Manga>` |
-| --- | --- | --- |
-| Cómic occidental | no | `No` |
-| Manga | sí (por defecto) | `YesAndRightToLeft` |
-| Manga | no | `Yes` |
-| Manhwa / Webtoon | no (LTR o vertical) | `No` (`Format=Web`) |
-
-Ejemplos en `examples/ComicInfo.manga-rtl.xml` y `examples/ComicInfo.comic-ltr.xml`.
+- **Archivos de imagenes**: `0001.jpg`, `0002.png`, … (padding de 4 dígitos; se conserva la extensión original)
+- `ComicInfo.xml` (UTF-8, esquema Anansi / ComicInfo v2.0–v2.1) que contiene los metados del archivo
+- Compresión ZIP: **STORE** para imágenes (ya vienen comprimidas) y DEFLATE rápido para el XML.
 
 ## Dependencias y licencias
 
@@ -113,9 +98,7 @@ dotnet publish src/ComicPackager.App -c Release -r osx-arm64 --self-contained tr
 
 ## Issues conocidos
 
-Ver [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md). Los más importantes:
+Ver [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md). 
 
-- CBR exige el binario `rar`. `unrar` no sirve (solo extrae).
-- No se convierte a PDF a propósito.
-- TIFF depende de los códecs de Skia en cada plataforma.
-- Máximo 9999 páginas (nombres de 4 dígitos).
+
+Made in Chile 🇨🇱
