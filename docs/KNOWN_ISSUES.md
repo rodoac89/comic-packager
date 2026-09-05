@@ -1,45 +1,45 @@
-# Issues conocidos
+# Known issues
 
-## CBR / binario `rar`
+## CBR / `rar` binary
 
-- Crear un CBR **válido** requiere el compresor `rar` de RARLAB (WinRAR en Windows, el paquete comercial `rar` en Linux/macOS).
-- `unrar`, `unar` y 7-Zip **no** se usan: no generan un RAR original, o solo extraen.
-- Si `rar` no está en el PATH ni en las rutas habituales (`C:\Program Files\WinRAR\Rar.exe`, `/usr/bin/rar`, `/opt/homebrew/bin/rar`), la UI **deshabilita CBR**, muestra el motivo y deja solo CBZ.
-- **Nunca** se escribe un ZIP y se le cambia la extensión a `.cbr`. Eso rompe lectores estrictos y es exactamente lo que este programa evita.
-- Tras crear un CBR no se puede verificar el índice interno sin `unrar`/`rar l`; solo se comprueba que el archivo existe y no está vacío.
-- WinRAR no se redistribuye (licencia propietaria). El usuario debe instalarlo por su cuenta.
+- Creating a **valid** CBR requires RARLAB’s `rar` compressor (WinRAR on Windows, the commercial `rar` package on Linux/macOS).
+- `unrar`, `unar`, and 7-Zip are **not** used: they do not produce an original RAR, or they only extract.
+- If `rar` is not on the PATH or in the usual locations (`C:\Program Files\WinRAR\Rar.exe`, `/usr/bin/rar`, `/opt/homebrew/bin/rar`), the UI **disables CBR**, shows the reason, and leaves only CBZ.
+- A ZIP is **never** written and then renamed to `.cbr`. That breaks strict readers and is exactly what this program avoids.
+- After creating a CBR, the internal index cannot be verified without `unrar`/`rar l`; the app only checks that the file exists and is not empty.
+- WinRAR is not redistributed (proprietary license). The user must install it themselves.
 
-## Formato y lectores
+## Format and readers
 
-- Algunos lectores antiguos ignoran `ComicInfo.xml` y no respetan `YesAndRightToLeft`. El checkbox RTL no reordena páginas a propósito, para no confundir a los que sí leen metadatos. Si las imágenes se cargaron al revés, usar «Invertir orden de páginas ahora».
-- Komga/Kavita leen `Manga = YesAndRightToLeft`. Otros pueden tratar cualquier `Yes*` como manga.
-- El campo `Format` se escribe `Digital` (cómic/manga) o `Web` (manhwa/webtoon). No es el formato de archivo CBZ/CBR.
+- Some older readers ignore `ComicInfo.xml` and do not honor `YesAndRightToLeft`. The RTL checkbox does not reorder pages on purpose, so it does not confuse readers that do respect metadata. If the images were loaded in reverse, use **Reverse page order now**.
+- Komga/Kavita read `Manga = YesAndRightToLeft`. Others may treat any `Yes*` value as manga.
+- The `Format` field is written as `Digital` (comic/manga) or `Web` (manhwa/webtoon). It is not the CBZ/CBR file format.
 
-## Imágenes
+## Images
 
-- `.tiff`/`.tif` es opcional: Skia puede no decodificar todos los TIFF (especialmente comprimidos con LZW/JPEG). Esos archivos se marcan como corruptos/no decodificables.
-- GIF animados: se empaqueta el archivo original; la miniatura suele ser el primer fotograma.
-- JPEG progresivos o CMYK raros pueden fallar al generar miniatura y reportarse como no decodificables aunque otro visor los abra.
-- No se recodifican las páginas al empaquetar: se copian tal cual (STORE en ZIP). Si el original está corrupto, el CBZ también lo estará.
+- `.tiff`/`.tif` is optional: Skia may not decode every TIFF (especially LZW/JPEG-compressed ones). Those files are marked as corrupt/undecodable.
+- Animated GIFs: the original file is packed; the thumbnail is usually the first frame.
+- Progressive JPEGs or unusual CMYK files may fail thumbnail generation and be reported as undecodable even if another viewer opens them.
+- Pages are not re-encoded when packing: they are copied as-is (STORE in ZIP). If the original is corrupt, the CBZ will be too.
 
-## Empaquetado
+## Packing
 
-- Máximo 9999 páginas por el padding `0001`–`9999`.
-- Nombres de archivo de salida se sanitizan (`: / \ * ?` → `_`) para que el mismo nombre sirva en Windows, Linux y macOS.
-- Si el destino ya existe, se pregunta antes de sobrescribir. Un empaquetado a medias se intenta borrar.
-- Las miniaturas viven en `%TEMP%/ComicPackager/thumbs` (o `/tmp/ComicPackager/thumbs`). No se limpian al salir, para reutilizar caché; se pueden borrar a mano.
+- Maximum of 9999 pages because of the `0001`–`9999` padding.
+- Output file names are sanitized (`: / \ * ?` → `_`) so the same name works on Windows, Linux, and macOS.
+- If the destination already exists, the app asks before overwriting. A half-finished pack is deleted when possible.
+- Thumbnails live in `%TEMP%/ComicPackager/thumbs` (or `/tmp/ComicPackager/thumbs`). They are not cleared on exit so the cache can be reused; they can be deleted manually.
 
 ## UI
 
-- El icono actual es el de la plantilla Avalonia (no hay branding propio).
-- En Wayland, el drag & drop desde el gestor de archivos depende del compositor.
-- La vista previa grande limita el decode a 2048 px de lado para no cargar escaneos de 6000 px en RAM.
-- Cambiar Serie/Número/Volumen regenera el nombre de archivo y puede pisar una edición manual previa.
+- The current icon is the Avalonia template icon (there is no custom branding yet).
+- On Wayland, drag & drop from the file manager depends on the compositor.
+- The large preview limits decoding to 2048 px on the long side so 6000 px scans are not loaded into RAM.
+- Changing Series/Number/Volume regenerates the file name and may overwrite a previous manual edit.
 
-## Lo que este programa no hace (a propósito)
+## What this program does not do (on purpose)
 
-- No convierte a PDF.
-- No requiere cuenta, red ni API.
-- No reordena páginas en silencio al marcar manga/RTL.
-- No pone las imágenes en subcarpetas del zip.
-- No incluye el binario `rar`.
+- It does not convert to PDF.
+- It does not require an account, network, or API.
+- It does not silently reorder pages when manga/RTL is checked.
+- It does not put images in subfolders inside the zip.
+- It does not bundle the `rar` binary.
